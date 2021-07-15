@@ -77,7 +77,7 @@ As you can see, almost nothing changed except the last rows:
 And that it is. The plugin is configured and ready to run. 
 
 ## Database
-The scripts to build the Afkplayer and twitchids tables are the following:
+The queries to build the Afkplayer and twitchids tables are the following:
 ```sql
 CREATE TABLE Afkplayer (
   name varchar(32) NOT NULL,
