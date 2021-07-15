@@ -1,0 +1,38 @@
+name: AfkFinder
+version: ${project.version}
+main: com.williamsimoni.afkfinder.AfkFinder
+api-version: 1.17
+authors: [ WilliamSimoni ]
+description: Identify AFK players in the server
+commands:
+  tpBungeeServer:
+    description: per prova
+    usage: /<command> <name>
+  addAfkLoc:
+    description: add a location to the afk zone of this server
+    usage: /<command> [name of the location] ([] means optional)
+    aliases:
+      - addafkloc
+      - addafklocation
+  rmAfkLoc:
+    description: remove the location named <name> from the afk zone of this server
+    usage: /<command> <name>
+    aliases:
+      - removeafklocation
+      - rmafklocation
+  saveAfkZone:
+    description: save the afkzone in a JSON file
+    usage: /<command>
+    aliases:
+      - saveafkzone
+  infoAfkZone:
+    description: give information about the afk zone
+    usage: /<command>
+    aliases:
+      - infoafkzone
+  tpAfkLoc:
+    description: tp the player in the specified afk position
+    usage: /<command> <name>
+    aliases:
+      - tpafkloc
+      - tpafklocation
