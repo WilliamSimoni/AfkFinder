@@ -79,15 +79,15 @@ And that it is. The plugin is configured and ready to run.
 ## Create AFK zones
 To create the AFK zone, we have to say to the plugin the locations where we plan to teleport the players when they are AFK. Notice that those locations can potentially be in wholly different parts of the world or the server. 
 
-To add an AFK position to the AFK zone of a server, we will use the **addAfkloc [name]** command, which has as an optional parameter the name you want to give to the AFK location. Consider **addAfkloc** as a button to take pictures. Once you perform that command, the server will record your location. If the plugin teleports players in that AFK location, they will see what you see now. For the sake of organization, you should always give a name to a location. In general, we suggest writing down on a piece of paper the structure of your AFK zone and write for every location its name. If you do not give a name to a location, the plugin will take care of it.
+To add an AFK position to the AFK zone of a server, we will use the ```addAfkloc [name]``` command, which has as an optional parameter the name you want to give to the AFK location. Consider **addAfkloc** as a button to take pictures. Once you perform that command, the server will record your location. If the plugin teleports players in that AFK location, they will see what you see now. For the sake of organization, you should always give a name to a location. In general, we suggest writing down on a piece of paper the structure of your AFK zone and write for every location its name. If you do not give a name to a location, the plugin will take care of it.
 
-You can remove an AFK location using **rmAfkLoc -name-**, which requires the name of the location you plan to delete.
+You can remove an AFK location using ```rmAfkLoc -name-```, which requires the name of the location you plan to delete.
 
-If you do not remember how an AFK location looks, you can use the **tpAfkLoc -name-** command, which will teleport you to the location called -name-.
+If you do not remember how an AFK location looks, you can use the ```tpAfkLoc -name-``` command, which will teleport you to the location called -name-.
 
-Once you are satisfied, remember to use the **saveafkzone**, which will write a .json file in the plugin directory.
+Once you are satisfied, remember to use the ```saveafkzone```, which will write a .json file in the plugin directory.
 
-Finally, you can monitor the AFK positions using **infoafkzone**. Infoafkzone will list all the AFK locations, coloring green the available locations, and coloring red the occupied ones. In the end, it will show the percentual of AFK locations occupied.
+Finally, you can monitor the AFK positions using ```infoafkzone```. Infoafkzone will list all the AFK locations, coloring green the available locations, and coloring red the occupied ones. In the end, it will show the percentual of AFK locations occupied.
 
 ## Database
 The queries to build the Afkplayer and twitchids tables are the following:
