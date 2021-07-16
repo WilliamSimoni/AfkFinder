@@ -76,7 +76,7 @@ As you can see, almost nothing changed except the last rows:
 
 And that it is. The plugin is configured and ready to run. 
 
-## Create and AFK zone
+## Create AFK zones
 To create the AFK zone, we have to say to the plugin the locations where we plan to teleport the players when they are AFK. Notice that those locations can potentially be in wholly different parts of the world or the server. 
 
 To add an AFK position to the AFK zone of a server, we will use the **addAfkloc [name]** command, which has as an optional parameter the name you want to give to the AFK location. Consider **addAfkloc** as a button to take pictures. Once you perform that command, the server will record your location. If the plugin teleports players in that AFK location, they will see what you see now. For the sake of organization, you should always give a name to a location. In general, we suggest writing down on a piece of paper the structure of your AFK zone and write for every location its name. If you do not give a name to a location, the plugin will take care of it.
