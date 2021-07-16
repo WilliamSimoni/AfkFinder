@@ -50,6 +50,11 @@ public class PlayerData {
         this.isAfk = false;
     }
 
+    //reset counter of afkMinutes
+    public void resetAfkMinutes(){
+        this.afkMinutes = 0;
+    }
+
     public void setAfkStatus(boolean isAfk){
         this.isAfk = isAfk;
     }

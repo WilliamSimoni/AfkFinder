@@ -109,7 +109,7 @@ public final class AfkFinder extends JavaPlugin {
             this.serverName = "";
         }
 
-        this.loggerHandler.info_message("configuration file loaded");
+        this.loggerHandler.info_message("Configuration file loaded");
 
         afkCentralConnect = new AfkCentralConnect(this);
 
@@ -123,7 +123,7 @@ public final class AfkFinder extends JavaPlugin {
             getCommand("infoAfkZone").setExecutor(afkZoneCommandsHandler);
             getCommand("tpAfkLoc").setExecutor(afkZoneCommandsHandler);
             this.afkZoneHandler = new AfkZoneHandler(this, "./plugins/AfkFinder/afkPositions.json");
-            this.loggerHandler.info_message("commands set");
+            this.loggerHandler.info_message("Commands set");
         }
 
         // *-*-*-*-*-*-*-*-*-*-* Creating data structures for the plugin *-*-*-*-*-*-*-*-*-*-*
@@ -141,16 +141,16 @@ public final class AfkFinder extends JavaPlugin {
 
         //removing previously afk players associated with this server
         if (this.afkDatabase.removeAllRows(this.serverName)) {
-            this.loggerHandler.info_message("server database initialized");
+            this.loggerHandler.info_message("Server database initialized");
         } else {
-            this.loggerHandler.error_message("can not communicate with the database. Disabling plugin");
+            this.loggerHandler.error_message("Can not communicate with the database. Disabling plugin");
             return;
         }
 
         //initialize data structure containing players timestamp
         playersData = new ConcurrentHashMap<>();
         afkPlayers = new LinkedList<>();
-        this.loggerHandler.info_message("all data structures created");
+        this.loggerHandler.info_message("All data structures created");
 
         //register event handlers
         getServer().getPluginManager().registerEvents(new QuitJoinEventHandler(this), this);
@@ -158,7 +158,7 @@ public final class AfkFinder extends JavaPlugin {
 
         //run AFK finder task (1200L = 1 minute)
         new FindAfkTask(this).runTaskTimerAsynchronously(this, 1200L, 1200L);
-        this.loggerHandler.info_message("ready to find AFK players");
+        this.loggerHandler.info_message("Ready to find AFK players");
     }
 
 

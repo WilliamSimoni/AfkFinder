@@ -32,18 +32,28 @@ public final class QuitJoinEventHandler implements Listener {
             //put in data structure only if we need to control the player
             //read whether the player is Afk or not
             PlayerData playerData = new PlayerData(null, this.afkFinder.afkTimePerSub.get(subLevel));
-            //set the status of the player
             if (this.afkFinder.afkDatabase.isAfk(player)){
-                playerData.setAfkStatus(true);
-                this.afkFinder.afkPlayers.add(player.getUniqueId());
+                //put player in data structure containing info about all players
+                this.afkFinder.playersData.put(player.getUniqueId(), playerData);
+                if (this.afkFinder.afkZoneActive){
+                    //set afk status of the player to true
+                    playerData.setAfkStatus(true);
+                    //put the player in list of AFK players
+                    this.afkFinder.afkPlayers.add(player.getUniqueId());
+                    //TODO teleport the player in the afk zone
+                } else {
+                    //remove the player from the AFK database
+                    this.afkFinder.afkDatabase.removeAfkPlayerData(player);
+                }
+            } else {
+                //put player in data structure containing info about all players
+                this.afkFinder.playersData.put(player.getUniqueId(), playerData);
             }
 
-            //put player in data structure containing info about all players
-            this.afkFinder.playersData.put(player.getUniqueId(), playerData);
         } else {
             if (this.afkFinder.afkDatabase.isAfk(player)){
                 //this should not happen (BUT non si sa mai)
-                this.afkFinder.loggerHandler.warning_message("player with sub level " + subLevel + " was into Afk database");
+                this.afkFinder.loggerHandler.warning_message("Player with sub level " + subLevel + " was into Afk database");
                 this.afkFinder.afkDatabase.removeAfkPlayerData(player);
             }
         }

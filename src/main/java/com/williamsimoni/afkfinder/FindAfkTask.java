@@ -17,7 +17,7 @@ public class FindAfkTask extends BukkitRunnable {
     }
 
     public void handleAfk(PlayerData playerData, UUID playerUuid){
-        this.afkFinder.loggerHandler.info_message("player " + playerUuid + " is Afk");
+        this.afkFinder.loggerHandler.info_message("Player " + playerUuid + " is Afk");
 
         //add player to afk database
         Player player = Bukkit.getPlayer(playerUuid);
@@ -60,7 +60,7 @@ public class FindAfkTask extends BukkitRunnable {
                         }
                     } else {
                         //location changed. So reset th afk information about the player
-                        playerData.resetAfkStatus();
+                        playerData.resetAfkMinutes();
                     }
                 } else {
                     this.afkFinder.loggerHandler.warning_message("Player with id " + ((Map.Entry) uuidPlayerDataEntry).getKey() + "was considered online");
