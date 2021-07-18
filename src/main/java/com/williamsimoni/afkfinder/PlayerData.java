@@ -28,6 +28,10 @@ public class PlayerData {
                 a.getYaw() == b.getYaw();
     }
 
+    public Location getLocation(){
+        return this.position;
+    }
+
     //return true if the new position is the same of the previous
     public boolean setLocation(Location position){
         boolean sameLocation = comparePosition(this.position, position);

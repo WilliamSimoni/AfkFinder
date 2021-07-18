@@ -31,24 +31,23 @@ public final class QuitJoinEventHandler implements Listener {
         if (this.afkFinder.afkTimePerSub.get(subLevel) > 0) {
             //put in data structure only if we need to control the player
             //read whether the player is Afk or not
-            PlayerData playerData = new PlayerData(null, this.afkFinder.afkTimePerSub.get(subLevel));
-            if (this.afkFinder.afkDatabase.isAfk(player)){
-                //put player in data structure containing info about all players
-                this.afkFinder.playersData.put(player.getUniqueId(), playerData);
+            PlayerData playerData = new PlayerData(player.getLocation(), this.afkFinder.afkTimePerSub.get(subLevel));
+            String server = this.afkFinder.afkDatabase.getServer(player);
+            if (server != null){
                 if (this.afkFinder.afkZoneActive){
                     //set afk status of the player to true
                     playerData.setAfkStatus(true);
                     //put the player in list of AFK players
                     this.afkFinder.afkPlayers.add(player.getUniqueId());
-                    //TODO teleport the player in the afk zone
+                    //teleport the player in the afk zone
+                    this.afkFinder.afkZoneHandler.AddPlayer(player);
                 } else {
-                    //remove the player from the AFK database
+                    //remove the player from the AFK database if we are not in a server with AFK zone
                     this.afkFinder.afkDatabase.removeAfkPlayerData(player);
                 }
-            } else {
-                //put player in data structure containing info about all players
-                this.afkFinder.playersData.put(player.getUniqueId(), playerData);
             }
+            //put player in data structure containing info about all players
+            this.afkFinder.playersData.put(player.getUniqueId(), playerData);
 
         } else {
             if (this.afkFinder.afkDatabase.isAfk(player)){
@@ -65,8 +64,10 @@ public final class QuitJoinEventHandler implements Listener {
 
         if (this.afkFinder.afkZoneActive || !this.afkFinder.afkZoneTp){
             PlayerData playerData = this.afkFinder.playersData.get(player.getUniqueId());
-            if (playerData != null && playerData.isAfk())
+            if (playerData.isAfk()) {
                 this.afkFinder.afkDatabase.removeAfkPlayerData(player);
+                this.afkFinder.afkZoneHandler.playerQuit(player);
+            }
         }
 
         //Note: if afkZoneTp=true, then the quit event could happen when the player is moved in the AFK zone in

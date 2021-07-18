@@ -27,8 +27,9 @@ public final class PlayerActionEvents implements Listener {
 
         if (playerData != null){
             //remove the player from the AFK database
+            String server = this.afkFinder.afkDatabase.getServer(player);
             if (this.afkFinder.afkDatabase.removeAfkPlayerData(player)){
-                //set player status to false (if operation with database goes well)
+                //set player status to false (if operation with database went well)
                 playerData.resetAfkStatus();
                 //remove the player from the list of afk players
                 this.afkFinder.afkPlayers.remove(player.getUniqueId());
@@ -37,8 +38,7 @@ public final class PlayerActionEvents implements Listener {
 
                 if (this.afkFinder.afkZoneActive){
                     //handle tp of the player
-                } else if (this.afkFinder.afkZoneTp){
-                    //teleport player in other server
+                    this.afkFinder.afkZoneHandler.removePlayer(player, server);
                 }
             } else {
                 //unable to remove the player from the database, so treat him still as AFK

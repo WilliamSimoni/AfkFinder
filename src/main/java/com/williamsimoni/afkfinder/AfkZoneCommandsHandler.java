@@ -35,6 +35,7 @@ public class AfkZoneCommandsHandler implements CommandExecutor, TabCompleter {
                 if (command.getName().equalsIgnoreCase("tpBungeeServer")){
                     String name = args[0];
                     boolean res = this.afkFinder.afkCentralConnect.sendToServer(player,name);
+                    System.out.println(res);
                     return true;
                 }
 
@@ -94,7 +95,7 @@ public class AfkZoneCommandsHandler implements CommandExecutor, TabCompleter {
                 //save afk zone /////*******//////////*******//////////*******//////////*******//////////*******/////***
                 if (command.getName().equalsIgnoreCase("saveAfkZone")){
                     if (this.afkFinder.afkZoneHandler.saveZones("./plugins/AfkFinder/afkPositions.json"))
-                        player.sendMessage(ChatColor.GREEN + "Positions saved. Check afkPositions.json in the plugin directory");
+                        player.sendMessage(ChatColor.GREEN + "Locations saved. Check afkPositions.json in the plugin directory");
                     else
                         player.sendMessage(ChatColor.RED + "Problems in saving the new positions.");
                     return true;

@@ -217,7 +217,7 @@ public class AfkZone {
             }
         }
 
-        int percentageOccupiedZones = (numOcp/this.zones.size() * 100)%5;
+        int percentageOccupiedZones = ((numOcp * 100)/this.zones.size())%5;
         String percentageString = "";
 
         for (int i = 0; i < percentageOccupiedZones; i++){
@@ -234,7 +234,7 @@ public class AfkZone {
             }
         }
 
-        result += "% of positions occupied: " + percentageString;
+        result += "% of locations occupied: " + percentageString;
 
         return  result;
     }

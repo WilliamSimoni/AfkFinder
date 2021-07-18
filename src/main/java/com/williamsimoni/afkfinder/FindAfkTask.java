@@ -27,15 +27,20 @@ public class FindAfkTask extends BukkitRunnable {
                 this.afkFinder.loggerHandler.error_message("Database is unreachable");
                 playerData.setAfkStatus(false);
             } else {
-                //add player in afk list
-                this.afkFinder.afkPlayers.add(playerUuid);
+                if (this.afkFinder.afkZoneActive){
+                    //handle tp of the player
+                    this.afkFinder.afkZoneHandler.AddPlayer(player);
+                    //add player to afkPlayers list
+                    this.afkFinder.afkPlayers.add(playerUuid);
+                } else if (this.afkFinder.afkZoneTp) {
+                    //add player to afkPlayers list
+                    this.afkFinder.afkPlayers.add(playerUuid);
+                    //handle transfer of the player in other server
+                    this.afkFinder.afkCentralConnect.sendToServer(player, this.afkFinder.afkZoneServer);
+                }
             }
-        }
-
-        if (this.afkFinder.afkZoneActive){
-            //handle tp of the player
-        } else if (this.afkFinder.afkZoneTp) {
-            //handle transfer of the player in other server
+        } else {
+            //TODO handle this exception
         }
 
     }

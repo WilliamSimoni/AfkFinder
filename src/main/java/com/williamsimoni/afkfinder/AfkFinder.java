@@ -5,7 +5,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.SQLException;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 public final class AfkFinder extends JavaPlugin {
 
@@ -148,7 +147,7 @@ public final class AfkFinder extends JavaPlugin {
         }
 
         //initialize data structure containing players timestamp
-        playersData = new ConcurrentHashMap<>();
+        playersData = new HashMap<>();
         afkPlayers = new LinkedList<>();
         this.loggerHandler.info_message("All data structures created");
 
@@ -157,7 +156,7 @@ public final class AfkFinder extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerActionEvents(this), this);
 
         //run AFK finder task (1200L = 1 minute)
-        new FindAfkTask(this).runTaskTimerAsynchronously(this, 1200L, 1200L);
+        new FindAfkTask(this).runTaskTimer(this, 1200L, 1200L);
         this.loggerHandler.info_message("Ready to find AFK players");
     }
 
