@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.UUID;
 
 public class AfkZoneCommandsHandler implements CommandExecutor, TabCompleter {
 
@@ -30,14 +31,6 @@ public class AfkZoneCommandsHandler implements CommandExecutor, TabCompleter {
 
         if (player != null){
             if (player.isOp()){
-
-                //JUST FOR TEST
-                if (command.getName().equalsIgnoreCase("tpBungeeServer")){
-                    String name = args[0];
-                    boolean res = this.afkFinder.afkCentralConnect.sendToServer(player,name);
-                    System.out.println(res);
-                    return true;
-                }
 
                 //add afk location /////*******//////////*******//////////*******//////////*******//////////*******/////
                 if (command.getName().equalsIgnoreCase("addAfkLoc")){

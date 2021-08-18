@@ -23,17 +23,18 @@ public class AfkZoneHandler {
     }
 
     //move player into afk zone
-    public void AddPlayer(Player player){
+    public boolean AddPlayer(Player player){
         //define location where the server will tp the player
         Location tpLocation = this.afkZone.occupyZone(player.getUniqueId());
 
         if (tpLocation == null){
-            //if the afk zone is full put the player into the waiting queue
-            //TODO
+            //if the afk zone is full do nothing (for now)
         } else {
             //if there is space, teleport the player into that location
             player.teleport(tpLocation);
         }
+
+        return true;
     }
 
     //remove player data from all data structures
