@@ -16,6 +16,7 @@ AfkFinder:
     Sub1: 20
     Sub2: 30
     Sub3: -1
+  AfkCheckInterval: 2
   DatabaseAfk:
     Url: localhost
     Port: 3306
@@ -30,7 +31,10 @@ AfkFinder:
     ServerName: Lobby
   ServerName: Lobby
 ```
-* The **AfkTimes** fields indicate after how long (in minutes) the plugin considers a player with a certain sub-level an AFK player. In our example, a player with sub-level 0 is considered AFK after 10 minutes of inactivity. On the other hand, players with sub-level three do not have to worry about the sinister Afk finder because the plugin will never consider them AFK.
+
+* The **AfkTimes** fields indicate after how long (in minutes) the plugin considers a player with a certain sub-level an AFK player. In our example, a player with sub-level 0 is considered AFK after 10 minutes of inactivity. On the other hand, players with sub-level three do not have to worry about the sinister Afk finder because the plugin will never consider them AFK. 
+
+* **AfkCheckInterval** is a positive integer number that indicates the interval (in minutes) between two searches for AFK players. The higher is this number, the lighter the plugin will be. However, the lower is this number, the more precise the plugin will be. 1 is the smallest number you can use in this field. To not have unexpected behaviors use a number that is a positive divisor of all the AfkTimes. In our example, the plugin will perform a search every 2 minutes.
 
 * The **DatabaseAfk** fields contain information that allows the plugin to communicate with the database. In our example, the database is in the same machine as the Paper servers through port 3306. The database containing our tables of interest is called mc. 
 
@@ -53,6 +57,7 @@ AfkFinder:
     Sub1: 20
     Sub2: 30
     Sub3: -1
+  AfkCheckInterval: 2
   DatabaseAfk:
     Url: localhost
     Port: 3306
