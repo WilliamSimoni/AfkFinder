@@ -58,8 +58,20 @@ public final class AfkFinder extends JavaPlugin {
 
         config.addDefault("AfkFinder.ServerName", "");
 
+        //the interval (in minutes) between two finfAfkTask executions
+        config.addDefault("AfkFinder.AfkCheckInterval", 1);
+
         config.options().copyDefaults(true);
         saveConfig();
+    }
+
+    private void putAfkTimePerSub(Integer key, Integer value, int afkPeriodInMinutes){
+        if (value > 0){
+            this.afkTimePerSub.put(key, Math.floorDiv(value, afkPeriodInMinutes));
+        } else {
+            this.afkTimePerSub.put(key, value);
+        }
+        System.out.println(this.afkTimePerSub.get(key));
     }
 
     @Override
@@ -72,12 +84,16 @@ public final class AfkFinder extends JavaPlugin {
         //set the logger
         this.loggerHandler = new LoggerHandler(config.getBoolean("AfkFinder.Log.Active", true));
 
+        //get afkPeriodInMinutes (time between two checks for afk players in minutes)
+        //the minimum afkPeriodInMinutes should be one, so, if the user put a number below one, the plugin will still use one as afkPeriodInMinutes
+        int afkPeriodInMinutes = Math.max(config.getInt("AfkFinder.AfkCheckInterval", 1), 1);
+
         //Getting times which indicate whenever a player is considered AFK according to its sub level
         this.afkTimePerSub = new HashMap<>();
-        this.afkTimePerSub.put(0, this.config.getInt("AfkFinder.AfkTimes.Sub0", 0));
-        this.afkTimePerSub.put(1000, this.config.getInt("AfkFinder.AfkTimes.Sub1", 10));
-        this.afkTimePerSub.put(2000, this.config.getInt("AfkFinder.AfkTimes.Sub2", 20));
-        this.afkTimePerSub.put(3000, this.config.getInt("AfkFinder.AfkTimes.Sub3", -1));
+        putAfkTimePerSub(0, this.config.getInt("AfkFinder.AfkTimes.Sub0", 10), afkPeriodInMinutes);
+        putAfkTimePerSub(1000, this.config.getInt("AfkFinder.AfkTimes.Sub1", 20), afkPeriodInMinutes);
+        putAfkTimePerSub(2000, this.config.getInt("AfkFinder.AfkTimes.Sub2", 30), afkPeriodInMinutes);
+        putAfkTimePerSub(3000, this.config.getInt("AfkFinder.AfkTimes.Sub3", -1), afkPeriodInMinutes);
 
         //getting database information
         //database information
@@ -115,7 +131,6 @@ public final class AfkFinder extends JavaPlugin {
         //register the commands to handle afk zone and create the afkzone handler
         if (this.afkZoneActive) {
             AfkZoneCommandsHandler afkZoneCommandsHandler = new AfkZoneCommandsHandler(this);
-            getCommand("tpBungeeServer").setExecutor(afkZoneCommandsHandler); //to be deleted (just for test)
             getCommand("addAfkLoc").setExecutor(afkZoneCommandsHandler);
             getCommand("rmAfkLoc").setExecutor(afkZoneCommandsHandler);
             getCommand("saveAfkZone").setExecutor(afkZoneCommandsHandler);
@@ -156,7 +171,8 @@ public final class AfkFinder extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerActionEvents(this), this);
 
         //run AFK finder task (1200L = 1 minute)
-        new FindAfkTask(this).runTaskTimer(this, 1200L, 1200L);
+        long period = 1200L * afkPeriodInMinutes;
+        new FindAfkTask(this).runTaskTimer(this, period, period);
         this.loggerHandler.info_message("Ready to find AFK players");
     }
 

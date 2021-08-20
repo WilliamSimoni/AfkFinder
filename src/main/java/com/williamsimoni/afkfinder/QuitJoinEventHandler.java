@@ -61,12 +61,13 @@ public final class QuitJoinEventHandler implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent e){
         Player player = e.getPlayer();
+        PlayerData playerData = this.afkFinder.playersData.get(player.getUniqueId());
 
         if (this.afkFinder.afkZoneActive || !this.afkFinder.afkZoneTp){
-            PlayerData playerData = this.afkFinder.playersData.get(player.getUniqueId());
             if (playerData.isAfk()) {
                 this.afkFinder.afkDatabase.removeAfkPlayerData(player);
-                this.afkFinder.afkZoneHandler.playerQuit(player);
+                if (this.afkFinder.afkZoneActive)
+                    this.afkFinder.afkZoneHandler.playerQuit(player);
             }
         }
 
@@ -75,7 +76,10 @@ public final class QuitJoinEventHandler implements Listener {
 
         //delete the player from the data structures
         this.afkFinder.playersData.remove(player.getUniqueId());
-        this.afkFinder.afkPlayers.remove(player.getUniqueId());
+
+        if (playerData.isAfk()) {
+            this.afkFinder.afkPlayers.remove(player.getUniqueId());
+        }
 
     }
 
