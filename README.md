@@ -1,5 +1,5 @@
 # AfkFinder
-Plugin to handle afk players. 
+Plugin to handle AFK players. The plugin assumes you have multiple servers running with Bungeecord. Of course, you can modify the plugin to make it work for your project.
 
 ## Configuration tutorial
 
