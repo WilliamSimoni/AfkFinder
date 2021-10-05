@@ -67,7 +67,7 @@ public final class AfkFinder extends JavaPlugin {
 
     private void putAfkTimePerSub(Integer key, Integer value, int afkPeriodInMinutes){
         if (value > 0){
-            this.afkTimePerSub.put(key, Math.floorDiv(value, afkPeriodInMinutes));
+            this.afkTimePerSub.put(key, (int)Math.ceil((float)value / afkPeriodInMinutes));
         } else {
             this.afkTimePerSub.put(key, value);
         }

@@ -51,7 +51,7 @@ public class AfkZoneHandler {
     public boolean removePlayer(Player player, String serverName){
         if (!this.afkZone.freeZone(player.getUniqueId())){
 
-            this.afkFinder.loggerHandler.error_message("Player was considered in Afk Zone, but there is not any player with id " + player.getUniqueId() + " inside this afk zone");
+            //this.afkFinder.loggerHandler.error_message("Player was considered in Afk Zone, but there is not any player with id " + player.getUniqueId() + " inside this afk zone");
             return false;
 
         } else {

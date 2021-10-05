@@ -63,6 +63,9 @@ public final class QuitJoinEventHandler implements Listener {
         Player player = e.getPlayer();
         PlayerData playerData = this.afkFinder.playersData.get(player.getUniqueId());
 
+        if (playerData == null)
+            return;
+
         if (this.afkFinder.afkZoneActive || !this.afkFinder.afkZoneTp){
             if (playerData.isAfk()) {
                 this.afkFinder.afkDatabase.removeAfkPlayerData(player);

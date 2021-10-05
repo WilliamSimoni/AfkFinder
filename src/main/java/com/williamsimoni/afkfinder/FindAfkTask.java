@@ -47,11 +47,11 @@ public class FindAfkTask extends BukkitRunnable {
 
     @Override
     public void run() {
+        this.afkFinder.loggerHandler.info_message("Checking for AFK players");
         //iterate over players in data structure
         for (Map.Entry<UUID, PlayerData> uuidPlayerDataEntry : this.afkFinder.playersData.entrySet()) {
 
             PlayerData playerData = (PlayerData) ((Map.Entry) uuidPlayerDataEntry).getValue();
-
             //update the position of the player (if the player is not afk)
             if (!playerData.isAfk()){
                 Player player = Bukkit.getPlayer((UUID) ((Map.Entry) uuidPlayerDataEntry).getKey());

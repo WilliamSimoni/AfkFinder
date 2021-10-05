@@ -41,7 +41,7 @@ public class Database {
             else
                 return null;
         } catch(SQLException exception) {
-            //exception.printStackTrace();
+            exception.printStackTrace();
         }
         return null;
     }
@@ -57,7 +57,7 @@ public class Database {
             query.executeUpdate();
             return true;
         } catch(SQLException exception) {
-            //exception.printStackTrace();
+            exception.printStackTrace();
         }
         return false;
     }
@@ -74,7 +74,7 @@ public class Database {
             query.executeUpdate();
             return true;
         } catch(SQLException exception) {
-            //exception.printStackTrace();
+            exception.printStackTrace();
         }
         return false;
     }
@@ -89,7 +89,7 @@ public class Database {
             ResultSet set = query.executeQuery();
             return set.next();
         } catch(SQLException exception) {
-            //exception.printStackTrace();
+            exception.printStackTrace();
         }
         return false;
     }
@@ -103,7 +103,7 @@ public class Database {
             else
                 return 0;
         } catch (SQLException throwables) {
-            //throwables.printStackTrace();
+            throwables.printStackTrace();
         }
         return 0;
     }
@@ -115,7 +115,7 @@ public class Database {
             query.executeUpdate();
             return true;
         } catch(SQLException exception) {
-            //exception.printStackTrace();
+            exception.printStackTrace();
         }
         return false;
     }
